@@ -1,5 +1,7 @@
-<?php include_once("../template/header.php") ?>
-<?php for ($i=0; $i < 5; $i++) { ?>
+<?php include_once "../template/header.php"?>
+
+
+<?php for ($i = 0; $i < 5; $i++) {?>
 
 <div class="container ">
   <div class="mx-56">
@@ -30,5 +32,5 @@
   </div>
 </div>
 
-<?php } ?>
-<?php include_once("../template/footer.php") ?>
+<?php }?>
+<?php include_once "../template/footer.php"?>

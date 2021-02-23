@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php include_once('./template/header.php');?>
-<?php require_once('./db.php');?>
+<?php include_once './template/header.php';?>
+<?php require_once './db.php';?>
 
 <div class="mx-2 py-12 px-4 col-span-2 bg-gradient-to-r from-blue-900 to-blue-400">
   <p class="m-2 px-8 leading-loose text-2xl text-center">
@@ -15,7 +15,7 @@
         hey! are you tired of looking for an intern position ?
       </h3>
       <button type="submit" class="w-32 rounded-lg text-xl text-black bg-green-500 bottom-4">
-        find Job <br> offers</a>
+        <a href="./jobs\allJobs.php"> find Job <br> offers</a>
       </button>
     </div>
     <div class="col-span-1 items-center justify-center">
@@ -25,7 +25,7 @@
       <h3 class="text-3xl text-white leading-loose text-center">are you a HR manager looking for intern applicant
       </h3>
       <button class=" w-32 rounded-lg text-xl text-black bg-red-500 bottom-4">
-        <a href="./postJob.php"> Post Job offers</a>
+        <a href="./jobs/postJob.php"> Post Job offers</a>
 
       </button>
     </div>
@@ -161,6 +161,6 @@
 
 </div>
 
-<?php include_once('./template/footer.php');?>
+<?php include_once './template/footer.php';?>
 
 </html>
