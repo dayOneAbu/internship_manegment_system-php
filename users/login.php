@@ -1,7 +1,5 @@
 <?php include_once "../template/header.php";?>
 
-
-
 <?php
 require_once '../db.php';
 
@@ -15,8 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = mysqli_query($conn, $sql);
     $user = mysqli_fetch_assoc($user);
     if ($password == $user['Password']) {
-        header('Location: ../jobs/allJobs.php');
-
+        // session_start();
+        $_SESSION['email'] = $user['Email'] ?? null;
+        $_SESSION['USERID'] = $user['USERID'] ?? null;
+        $_SESSION['isManager'] = $user['isManager'] ?? null;
+        $_SESSION['name'] = $user['Name'] ?? null;
+        header('Location: ../index.php');
         mysqli_close($conn);
     } else {
         $error = " your password seems wrong please try again";

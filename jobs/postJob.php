@@ -1,5 +1,5 @@
 <?php include_once "../template/header.php";?>
-
+<?php require_once '../session.php';?>
 <?php
 
 require_once "../db.php";
@@ -64,38 +64,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $Description = $_POST['Description'];
     }
+
     if (array_filter($errors)) {
-        var_dump($errors);
+
         echo 'this form is invalid';
     } else {
-        $Position = mysqli_real_escape_string($conn, $_POST['Position']);
-        $Division = mysqli_real_escape_string($conn, $_POST['Division']);
-        $Duration = mysqli_real_escape_string($conn, $_POST['Duration']);
-        $Address = mysqli_real_escape_string($conn, $_POST['Address']);
-        $Contact = mysqli_real_escape_string($conn, $_POST['Contact']);
-        $Qualification = mysqli_real_escape_string($conn, $_POST['Qualification']);
-        $Payment = mysqli_real_escape_string($conn, $_POST['Payment']);
-        $Transport = mysqli_real_escape_string($conn, $_POST['Transport']);
-        $Description = mysqli_real_escape_string($conn, $_POST['Description']);
-        $created_at = mysqli_real_escape_string($conn, date('Y-m-d H:i:s'));
-
-        $sql = "INSERT INTO JOBS(Position,Division,Duration,Address,Contact, Qualification, Payment,Transport,Description, created_at) VALUES('$Position','$Division','$Duration','$Address','$Contact','$Qualification','$Payment','$Transport','$Description','$created_at')";
-        if (mysqli_query($conn, $sql)) {
-            var_dump($sql);
-
-            header('Location: ../index.php');
-            mysqli_close($conn);
+        if (!$_SESSION['isManager'] == true) {
+            echo 'please first create managers account';
         } else {
-            echo 'query error' . mysqli_error($conn);
-            mysqli_close($conn);
-        }
-    }
 
-    /* INSERT INTO `jobs` (`ID`, `Position`, `Division`, `Duration`, `Address`, `Contact`, `Qualification`, `Payment`, `Transport`, `Description`, `created_at`) VALUES (NULL, 'test1', 't1', '3 mon', 'bole', '0954', 'deg,dip', '1555/mon', '150/mon', 'hello world', CURRENT_TIME())
- */
+            $Position = mysqli_real_escape_string($conn, $_POST['Position']);
+            $Division = mysqli_real_escape_string($conn, $_POST['Division']);
+            $Duration = mysqli_real_escape_string($conn, $_POST['Duration']);
+            $Address = mysqli_real_escape_string($conn, $_POST['Address']);
+            $Contact = mysqli_real_escape_string($conn, $_POST['Contact']);
+            $Qualification = mysqli_real_escape_string($conn, $_POST['Qualification']);
+            $Payment = mysqli_real_escape_string($conn, $_POST['Payment']);
+            $Transport = mysqli_real_escape_string($conn, $_POST['Transport']);
+            $Description = mysqli_real_escape_string($conn, $_POST['Description']);
+            $created_at = mysqli_real_escape_string($conn, date('Y-m-d H:i:s'));
+            $USERID = $_SESSION['USERID'];
+
+            $sql = "INSERT INTO JOBS(Position,Division,Duration,Address,Contact, Qualification, Payment,Transport,Description, created_at,USERID) VALUES('$Position','$Division','$Duration','$Address','$Contact','$Qualification','$Payment','$Transport','$Description','$created_at','$USERID')";
+            if (mysqli_query($conn, $sql)) {
+                header('Location: ../index.php');
+                mysqli_close($conn);
+            } else {
+                echo 'query error' . mysqli_error($conn);
+                mysqli_close($conn);
+            }
+        }
+
+    }
 }
 
 ?>
+
+
 
 <div class=" p-4 bg-gray-200">
   <div class="mx-10 mt-4 py-4 flex flex-1 flex-col items-center justify-center ">

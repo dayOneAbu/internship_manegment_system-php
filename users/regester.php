@@ -13,6 +13,8 @@ $errors = array(
 
 );
 $isManager = '';
+$takenEmail = '';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($_POST['name'])) {
@@ -58,12 +60,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $checkUser = "SELECT * FROM USERS WHERE Email = '" . $email . "'";
         $user = mysqli_query($conn, $checkUser);
         if (mysqli_num_rows($user)) {
+            global $takenEmail;
             $takenEmail = ' user already regesterd !!!';
         } else {
             $sql = "INSERT INTO USERS(name,email,password,isManager, created_at)
                     VALUES ('$name','$email','$password','$isManager','$created_at')";
+
             if (mysqli_query($conn, $sql)) {
 
+                // session_start();
+                $_SESSION['email'] = $_POST['email'] ?? null;
+                $_SESSION['isManager'] = $_POST['isManager'] ?? null;
+                $_SESSION['name'] = $_POST['name'] ?? null;
                 header('Location: ../index.php');
                 mysqli_close($conn);
             } else {
@@ -95,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if you already have account click below to login!
       </h3>
       <button class=" w-32 h-16 mx-4 my-2  text-2xl capitalize  text-black bg-green-500 ">
-        login
+        <a href="./login.php">login</a>
       </button>
       </p>
     </div>

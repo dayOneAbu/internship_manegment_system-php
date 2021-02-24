@@ -1,7 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <?php include_once './template/header.php';?>
-<?php require_once './db.php';?>
+<?php require_once './db.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $isManager = true;
+    $checkUser = "SELECT * FROM USERS WHERE Email = '" . $_SESSION['email'] . "'";
+    $user = mysqli_query($conn, $checkUser);
+    if (!mysqli_num_rows($user)) {
+        header('Location: ./users/regester.php');
+    } else {
+        if (!empty($_POST['getjob'])) {
+            header('Location: ./jobs/allJobs.php');
+        } elseif (!empty($_POST['postjob'])) {
+            $user = mysqli_fetch_assoc($user);
+            if ($isManager == $user['isManager']) {
+                header('Location: ./jobs/postJob.php');
+            }
+
+        }
+    }
+
+}
+
+?>
 
 <div class="mx-2 py-12 px-4 col-span-2 bg-gradient-to-r from-blue-900 to-blue-400">
   <p class="m-2 px-8 leading-loose text-2xl text-center">
@@ -14,9 +37,14 @@
       <h3 class="text-3xl text-white leading-loose text-center">
         hey! are you tired of looking for an intern position ?
       </h3>
-      <button type="submit" class="w-32 rounded-lg text-xl text-black bg-green-500 bottom-4">
-        <a href="./jobs\allJobs.php"> find Job <br> offers</a>
-      </button>
+      <form action="index.php" method="post">
+        <button type="submit" value="getJob" name="getjob"
+          class="w-32 rounded-lg text-xl text-black bg-green-500 bottom-4">
+          find Job <br> offers
+        </button>
+      </form>
+
+
     </div>
     <div class="col-span-1 items-center justify-center">
       <h1 class="uppercase text-center text-3xl text-red-500 text-3xl text-white leading-loose text-center ">or</h1>
@@ -24,10 +52,15 @@
     <div class="mx-4 flex flex-col col-span-2 items-center justify-center">
       <h3 class="text-3xl text-white leading-loose text-center">are you a HR manager looking for intern applicant
       </h3>
-      <button class=" w-32 rounded-lg text-xl text-black bg-red-500 bottom-4">
-        <a href="./jobs/postJob.php"> Post Job offers</a>
 
-      </button>
+      <form action="index.php" method="post">
+
+        <button button type="submit" value="postjob" name="postjob"
+          class=" w-32 rounded-lg text-xl text-black bg-red-500 bottom-4">
+          Post Job offers
+        </button>
+      </form>
+
     </div>
   </div>
 </div>

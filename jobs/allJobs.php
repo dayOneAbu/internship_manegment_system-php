@@ -1,7 +1,23 @@
 <?php include_once "../template/header.php"?>
 
 
-<?php for ($i = 0; $i < 5; $i++) {?>
+<?php
+
+require_once '../db.php';
+
+$sql = "SELECT JOB_ID,Position,Duration,Description,created_at  FROM JOBS ORDER BY Created_at DESC";
+$response = mysqli_query($conn, $sql);
+$jobs = mysqli_fetch_all($response, MYSQLI_ASSOC);
+
+function limit_words($string, $word_limit)
+{
+    $words = explode(" ", $string);
+    return implode(" ", array_splice($words, 0, $word_limit));
+}
+
+?>
+
+<?php foreach ($jobs as $job) {?>
 
 <div class="container ">
   <div class="mx-56">
@@ -14,18 +30,25 @@
         <img src="./imgs/Overyall.png" alt="" class=" object-fill h-38 w-36 mx-2 rounded-xl">
       </div>
       <div class="mx-2 my-2">
-        <h3 class="text-2xl capitalize  leading-relaxed ">job title</h3>
-        <p class="text-xl "> 2 line job description Lorem ipsum dolor sit amet consectetur adipisicing
-          elit.
-          Culpa, quo!
-          <br>
-          <span class="justify-end items-center self-end">
-            <button class="rounded-full text-xl px-2 text-black bg-blue-400 ">
-              show more
-            </button>
-          </span>
-          <span class="mr-2 p-2 ml-10">date</span> <span class="ml-6 p-2">dead line</span>
+        <h3 class="text-2xl capitalize  leading-relaxed "><?php echo $job['Position']; ?></h3>
+        <h3 class="text-xl capitalize "><?php echo 'FOR ' . $job['Duration']; ?></h3>
+        <p class="text-xl ">
+          <?php $jobdesc = $job['Description'];
+
+    echo limit_words($jobdesc, 20);
+
+    ?>
         </p>
+        <span class="flex justify-center items-center ">
+          <button type="submit" value="submit" class="rounded-full text-xl px-2 text-black bg-blue-400 ">
+            <a href="./jobDesc.php?id=<?php echo $job['JOB_ID'] ?>">show more</a>
+
+          </button>
+          <span class="mr-2 p-2 ml-10">
+            <?php echo $job['created_at']; ?>
+          </span>
+        </span>
+
       </div>
     </div>
 

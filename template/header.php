@@ -1,9 +1,25 @@
+<?php
+session_start();
+$userName = ' ';
+
+$userName = $_SESSION['name'] ?? null;
+$email = $_SESSION['email'] ?? null;
+$USERID = $_SESSION['USERID'] ?? null;
+if ($userName && $email) {
+
+    global $userName, $email;
+    $userName = $_SESSION['name'];
+    $email = $_SESSION['email'];
+    $USERID = $_SESSION['USERID'];
+}
+
+?>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>home</title>
   <link rel="stylesheet" href="http://localhost:81/css/tailwind.css">
-  <!-- <link rel="stylesheet" href="public\tailwind.css"> -->
   <!-- <link rel="stylesheet" href="public\tailwind.css"> -->
 </head>
 
@@ -20,12 +36,15 @@
     </div>
     <div class="col-span-1 flex items-center justify-center">
       <ul class="flex flex-1 no-underline list-none  justify-evenly items-center">
-        <li class="flex items-center justify-center"><a class="text-indigo-700 font-medium "
-            href="users\regester.php">sign
-            up</a></li>
+        <li class="flex items-center justify-center">
+          <button type="submit" value="submit">
+            <a href="../intern/profile.php?id=<?php echo $USERID ?>">
+              <?php echo 'Hello ' . $userName ?>
+            </a>
 
-        <li class="flex items-center justify-center"><a class="text-indigo-700  font-medium" href="users\login.php">log
-            in</a></li>
+          </button>
+
+        </li>
         <li class="flex items-center justify-center"><a class="text-indigo-700  font-medium"
             href="../../public/support_us.html">support
             us</a></li>

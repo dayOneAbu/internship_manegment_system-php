@@ -13,19 +13,18 @@ if (!$conn) {
     mysqli_select_db($conn, "internethiopia");
 
     $users_table = "CREATE TABLE IF NOT EXISTS USERS  (
-        ID INT NOT NULL AUTO_INCREMENT,
+        USERID INT NOT NULL AUTO_INCREMENT,
         Name varchar(100)NOT NULL,
         Email varchar(100)NOT NULL,
         Password varchar(50)NOT NULL,
         isManager BOOLEAN NOT NULL DEFAULT FALSE,
-        created_at DATETIME NOT NULL,
-       primary key(ID) )";
+        created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+       primary key(USERID) )";
     if (!mysqli_query($conn, $users_table)) {
         echo 'error while creating the table' . mysqli_error($conn);
     }
-
     $jobs_table = "CREATE TABLE IF NOT EXISTS JOBS  (
-        ID INT NOT NULL AUTO_INCREMENT,
+        JOB_ID INT NOT NULL AUTO_INCREMENT,
         Position varchar(100)NOT NULL,
         Division varchar(100)NOT NULL,
         Duration varchar(150)NOT NULL,
@@ -36,9 +35,30 @@ if (!$conn) {
         Transport varchar(150)NOT NULL,
         Description varchar(250)NOT NULL,
         created_at DATETIME NOT NULL,
-       primary key(ID) )";
+        USERID INT NOT NULL,
+        primary key(JOB_ID),
+        FOREIGN KEY(USERID) REFERENCES USERS(USERID))";
+
     if (!mysqli_query($conn, $jobs_table)) {
         echo 'error while creating the table' . mysqli_error($conn);
     }
 
+    $profiles_table = "CREATE TABLE IF NOT EXISTS PROFILES  (
+        PROFILE_ID INT NOT NULL AUTO_INCREMENT,
+        Image varchar(2048) NULL,
+        Bio varchar(300) NULL,
+        Location varchar(150)NOT NULL,
+        Skills varchar(250)NOT NULL,
+        School varchar(250)NOT NULL,
+        Achivments varchar(250)NOT NULL,
+        Program varchar(250)NOT NULL,
+        created_at DATETIME NOT NULL,
+        USERID INT NOT NULL,
+       primary key(PROFILE_ID),FOREIGN KEY(USERID) REFERENCES USERS(USERID) )";
+    if (!mysqli_query($conn, $profiles_table)) {
+        echo 'error while creating the table' . mysqli_error($conn);
+    }
+
 }
+
+// Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut aliquid optio perferendis illo nobis. Itaque, vel aut? Accusantium atque neque laborum harum totam, quidem possimus tempora ratione dolorum nihil alias?
