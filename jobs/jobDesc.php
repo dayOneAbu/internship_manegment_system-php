@@ -11,7 +11,14 @@ if (!$id) {
 
 require_once '../db.php';
 
-$sql = "SELECT * FROM JOBS WHERE JOB_ID  = '" . $id . "'";
+$sql = "SELECT
+*,
+COMPANY.Comp_name,
+COMPANY.Comp_email,
+COMPANY.Comp_web
+FROM COMPANY INNER JOIN  JOBS ON COMPANY.COMP_ID = JOBS.COMP_ID
+WHERE JOB_ID = '" . $id . "'";
+
 $result = mysqli_query($conn, $sql);
 
 $job = mysqli_fetch_assoc($result);
@@ -27,10 +34,10 @@ mysqli_close($conn);
       <h1 class="text-3xl font-semibold capitalize leading-relaxed">
         <?php echo $job['Position']; ?>
       </h1>
-      <h2 class="text-2xl font-light capitalize leading-relaxed">company name</h2>
+      <h2 class="text-2xl font-light capitalize leading-relaxed"> <?php echo $job['Comp_name']; ?></h2>
       <div class="flex flex-auto items-center justify-evenly">
-        <span class=" font-semibold capitalize leading-relaxed">website</span>
-        <span class=" font-semibold capitalize leading-relaxed">email</span>
+        <span class=" font-semibold capitalize leading-relaxed"><?php echo $job['Comp_web']; ?></span>
+        <span class=" font-semibold capitalize leading-relaxed"><?php echo $job['Comp_email']; ?></span>
       </div>
     </div>
 
@@ -39,6 +46,14 @@ mysqli_close($conn);
 
         <h3 class="text-base font-light capitalize leading-relaxed">posted at: <span
             class="text-xl font-bols uppercase leading-relaxed"> <?php echo $job['created_at']; ?></span></h3>
+        <div class="grid grid-cols-3">
+          <span class="col-span-1">
+            <h1 class="text-2xl ml-4 font-medium capitalize">Position </h1>
+          </span>
+          <span class="col-span-2 mx-4">
+            <h2 class="text-xl font-medium capitalize"> <?php echo $job['Position']; ?></h2>
+          </span>
+        </div>
         <div class="grid grid-cols-3">
           <span class="col-span-1">
             <h1 class="text-2xl ml-4 font-medium capitalize">division</h1>

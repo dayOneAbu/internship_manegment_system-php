@@ -1,5 +1,6 @@
 <?php include_once "../template/header.php"?>
 <?php include_once "../session.php"?>
+<?php include_once "../helper.php"?>
 <?php
 
 require_once "../db.php";
@@ -45,11 +46,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Program = $_POST['Program'];
     }
     if (array_filter($errors)) {
-        var_dump($errors);
+
         echo 'this form is invalid';
     } else {
 
-        $Image = mysqli_real_escape_string($conn, $_POST['Image']);
+        $imagePath = '../images/a2.jpg';
+        if (empty($_FILES['Image'])) {
+            $Image = null;
+        } else {
+            $Image = $_FILES['Image'];
+            if (isset($Image)) {
+                $imagePath = '../images/' . randstring(10) . '/' . $Image['name'];
+                mkdir(dirname($imagePath));
+                move_uploaded_file($Image['tmp_name'], $imagePath);
+            }
+
+        }
+
+        $Image = $imagePath;
         $Bio = mysqli_real_escape_string($conn, $_POST['Bio']);
         $Location = mysqli_real_escape_string($conn, $_POST['Location']);
         $Skills = mysqli_real_escape_string($conn, $_POST['Skills']);
@@ -80,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       create your Profile
     </h2>
 </div>
-<form action="createProfile.php" method="POST" class="lg:mx-56 mt-20 mb-20 sm:mx-10 ">
+<form action="createProfile.php" method="POST" class="lg:mx-56 mt-20 mb-20 sm:mx-10 " enctype="multipart/form-data">
   <div class="flex flex-auto justify-evenly items-center border-2 border-indigo-300 rounded mx-2 my-4 p-1">
     <label class="font-bold leading-relaxed my-4 text-xl mx-2 flex-1 capitalize" for="Image">bussiness size
       image</label>
@@ -89,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="flex flex-auto justify-evenly items-center border-2 border-indigo-300 rounded mx-2 my-4 p-1">
     <label class="font-bold leading-relaxed my-4 text-xl mx-2 flex-1 capitalize" for="Bio">short bio of your
       self</label>
-    <textarea placeholder="how do you describe yor self" name="Bio" cols="24" rows="6"
+    <textarea placeholder="how do you describe your self" name="Bio" cols="24" rows="6"
       class="mx-2 px-2  py-1 flex-1 border-2 border-blue-300 rounded-l"></textarea>
     <h3 class="text-red-600 mx-4 ">
       <?php echo $errors['Bio']; ?>
@@ -133,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
 
   <div class="flex flex-auto justify-evenly items-center border-2 border-indigo-300 rounded mx-2 my-4 p-1">
-    <label class="font-bold leading-relaxed my-4 text-xl mx-2 flex-1 capitalize" for="Achivments">on Education
+    <label class="font-bold leading-relaxed my-4 text-xl mx-2 flex-1 capitalize" for="Achivments">Education
       status</label>
     <select class="mx-2 px-2 h-12 py-1 flex-1 border-2 border-blue-300 rounded-l" name="Achivments">
       <option>Pick your acadamic achivments</option>

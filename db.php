@@ -23,6 +23,23 @@ if (!$conn) {
     if (!mysqli_query($conn, $users_table)) {
         echo 'error while creating the table' . mysqli_error($conn);
     }
+    $company_table = "CREATE TABLE IF NOT EXISTS COMPANY  (
+        COMP_ID INT NOT NULL AUTO_INCREMENT,
+        Logo varchar(2048) NULL,
+        Comp_name varchar(100) NOT NULL,
+        Comp_email varchar(100)NOT NULL,
+        Comp_web varchar(100)NOT NULL,
+        Comp_phNo varchar(100)NOT NULL,
+        Comp_location varchar(100)NOT NULL,
+        Comp_desc varchar(250)NOT NULL,
+        created_at DATETIME NOT NULL,
+        USERID INT NOT NULL,
+       primary key(COMP_ID),
+       FOREIGN KEY(USERID) REFERENCES USERS(USERID))";
+    if (!mysqli_query($conn, $company_table)) {
+        echo 'error while creating the table' . mysqli_error($conn);
+    }
+
     $jobs_table = "CREATE TABLE IF NOT EXISTS JOBS  (
         JOB_ID INT NOT NULL AUTO_INCREMENT,
         Position varchar(100)NOT NULL,
@@ -36,8 +53,10 @@ if (!$conn) {
         Description varchar(250)NOT NULL,
         created_at DATETIME NOT NULL,
         USERID INT NOT NULL,
+        COMP_ID INT NOT NULL,
         primary key(JOB_ID),
-        FOREIGN KEY(USERID) REFERENCES USERS(USERID))";
+        FOREIGN KEY(USERID) REFERENCES USERS(USERID),
+        FOREIGN KEY(COMP_ID) REFERENCES COMPANY(COMP_ID))";
 
     if (!mysqli_query($conn, $jobs_table)) {
         echo 'error while creating the table' . mysqli_error($conn);

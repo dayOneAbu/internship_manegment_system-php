@@ -12,14 +12,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = "SELECT * FROM USERS WHERE Email = '" . $email . "'";
     $user = mysqli_query($conn, $sql);
     $user = mysqli_fetch_assoc($user);
+
     if ($password == $user['Password']) {
         // session_start();
         $_SESSION['email'] = $user['Email'] ?? null;
         $_SESSION['USERID'] = $user['USERID'] ?? null;
         $_SESSION['isManager'] = $user['isManager'] ?? null;
         $_SESSION['name'] = $user['Name'] ?? null;
-        header('Location: ../index.php');
-        mysqli_close($conn);
+        if ($user['isManager'] == true) {
+            $test = " SELECT USERID FROM COMPANY WHERE USERID = '" . $user['USERID'] . "'";
+            $res = mysqli_query($conn, $test);
+            $res = mysqli_fetch_assoc($res);
+
+            if ($res['USERID']) {
+
+                header('Location: ../company/profile.php?id=' . urldecode($res['USERID']));
+                mysqli_close($conn);
+            } else {
+                header('Location: ../company/createComp_Profile.php');
+                mysqli_close($conn);
+            }
+
+        } else {
+            $test = " SELECT USERID FROM PROFILES WHERE USERID = '" . $user['USERID'] . "'";
+            $res = mysqli_query($conn, $test);
+            $res = mysqli_fetch_assoc($res);
+
+            if ($res['USERID']) {
+
+                header('Location: ../intern/profile.php?id=' . urldecode($res['USERID']));
+                mysqli_close($conn);
+            } else {
+                header('Location: ../intern/createProfile.php');
+                mysqli_close($conn);
+            }
+
+        }
+
     } else {
         $error = " your password seems wrong please try again";
     }

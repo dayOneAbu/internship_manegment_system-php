@@ -75,71 +75,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
   <div class="grid grid-cols-5 gap-2">
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/a.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/b.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/c.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/d.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/e.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/f.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/g.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/h.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/i.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
     </div>
     <div class="rounded mx-2 p-2 bg-gray-100">
-      <img src="../imgs/5 reasons why I hate taking naps.png" class="overflow-hidden mx-2 my-2 rounded"
-        alt="company1" />
+      <img src="<?php echo './public/imgs/j.jpg' ?>" class="overflow-hidden mx-2 my-2 rounded" alt="company1" />
       <h2 class="text-xl text-center text-black font-semibold">
         we have a better employyes after we join interethopia.com
       </h2>
@@ -159,32 +149,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
   <div class="flex justify-evenly items-center">
     <div class="w-56 h-72 items-center justify-center mx-2 my-2 rounded-xl bg-gray-100">
-      <img src="../imgs/a2.jpg" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden " alt="company1" />
+      <img src="<?php echo './public/imgs/a2.jpg' ?>" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden "
+        alt="company1" />
       <h2 class="text-xl text-center text-blue-700 font-light">
         it's been hard finding a intern position before i join interethopia.com
       </h2>
     </div>
     <div class="w-56 h-72 items-center justify-center mx-2 my-2 rounded-xl bg-gray-100">
-      <img src="../imgs/a2.jpg" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden " alt="company1" />
+      <img src="<?php echo './public/imgs/images (1).png' ?>" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden "
+        alt="company1" />
       <h2 class="text-xl text-center text-blue-700 font-light">
         it's been hard finding a intern position before i join interethopia.com
       </h2>
     </div>
 
     <div class="w-56 h-72 items-center justify-center mx-2 my-2 rounded-xl bg-gray-100">
-      <img src="../imgs/a2.jpg" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden " alt="company1" />
+      <img src="<?php echo './public/imgs/download.png' ?>" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden "
+        alt="company1" />
       <h2 class="text-xl text-center text-blue-700 font-light">
         it's been hard finding a intern position before i join interethopia.com
       </h2>
     </div>
     <div class="w-56 h-72 items-center justify-center mx-2 my-2 rounded-xl bg-gray-100">
-      <img src="../imgs/a2.jpg" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden " alt="company1" />
+      <img src="<?php echo './public/imgs/images.jpg' ?>" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden "
+        alt="company1" />
       <h2 class="text-xl text-center text-blue-700 font-light">
         it's been hard finding a intern position before i join interethopia.com
       </h2>
     </div>
     <div class="w-56 h-72 items-center justify-center mx-2 my-2 rounded-xl bg-gray-100">
-      <img src="../imgs/a2.jpg" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden " alt="company1" />
+      <img src="<?php echo './public/imgs/a2.jpg' ?>" class="w-24 h-24 mx-12 my-2 rounded-full overflow-hidden "
+        alt="company1" />
       <h2 class="text-xl text-center text-blue-700 font-light">
         it's been hard finding a intern position before i join interethopia.com
       </h2>

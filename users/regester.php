@@ -67,13 +67,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES ('$name','$email','$password','$isManager','$created_at')";
 
             if (mysqli_query($conn, $sql)) {
+                $sqli = "SELECT USERID,isManager FROM USERS WHERE Email = '" . $email . "'";
+                $user = mysqli_query($conn, $sqli);
+                $user = mysqli_fetch_assoc($user);
 
-                // session_start();
                 $_SESSION['email'] = $_POST['email'] ?? null;
                 $_SESSION['isManager'] = $_POST['isManager'] ?? null;
                 $_SESSION['name'] = $_POST['name'] ?? null;
-                header('Location: ../index.php');
-                mysqli_close($conn);
+                $_SESSION['USERID'] = $user['USERID'] ?? null;
+                if ($user['isManager'] == true) {
+                    header('Location: ../company/createComp_Profile.php');
+                    mysqli_close($conn);
+                } else {
+                    header('Location: ../intern/createProfile.php');
+                    mysqli_close($conn);
+                }
+
             } else {
                 echo 'query error' . mysqli_error($conn);
                 mysqli_close($conn);

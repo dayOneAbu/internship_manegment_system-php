@@ -85,14 +85,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $created_at = mysqli_real_escape_string($conn, date('Y-m-d H:i:s'));
             $USERID = $_SESSION['USERID'];
 
-            $sql = "INSERT INTO JOBS(Position,Division,Duration,Address,Contact, Qualification, Payment,Transport,Description, created_at,USERID) VALUES('$Position','$Division','$Duration','$Address','$Contact','$Qualification','$Payment','$Transport','$Description','$created_at','$USERID')";
-            if (mysqli_query($conn, $sql)) {
-                header('Location: ../index.php');
-                mysqli_close($conn);
+            $sqli = "SELECT COMP_ID FROM COMPANY WHERE USERID = '" . $USERID . "'";
+            $company = mysqli_query($conn, $sqli);
+            $company = mysqli_fetch_assoc($company);
+            if (!$company) {
+                echo ' please create  company profile first';
             } else {
-                echo 'query error' . mysqli_error($conn);
-                mysqli_close($conn);
+                $fkUserId = $company['COMP_ID'];
+                $sql = "INSERT INTO JOBS(Position,Division,Duration,Address,Contact, Qualification, Payment,Transport,Description, created_at,USERID,COMP_ID) VALUES('$Position','$Division','$Duration','$Address','$Contact','$Qualification','$Payment','$Transport','$Description','$created_at','$USERID','$fkUserId')";
+                if (mysqli_query($conn, $sql)) {
+                    header('Location: ../index.php');
+                    mysqli_close($conn);
+                } else {
+                    echo 'query error' . mysqli_error($conn);
+                    mysqli_close($conn);
+                }
             }
+
         }
 
     }
